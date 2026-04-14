@@ -2,14 +2,12 @@ pipeline {
     agent any
 
     tools {
-    nodejs 'nodejs'
-}
+        nodejs 'nodejs'
+    }
 
     environment {
-        EC2_HOST = "52.21.96.212"
         EC2_USER = "ubuntu"
         APP_DIR = "/home/ubuntu/backend-project"
-
     }
 
     stages {
@@ -34,18 +32,20 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent(['ec2-ssh-key']) {
-                    sh """
-                    ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
-                        if [ ! -d "${APP_DIR}" ]; then
-                            git clone https://github.com/Jatinvashisth/backend-project.git ${APP_DIR};
-                        fi
+                    withCredentials([string(credentialsId: 'ec2-ip', variable: 'EC2_HOST')]) {
+                        sh """
+                        ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
+                            if [ ! -d "${APP_DIR}" ]; then
+                                git clone https://github.com/Jatinvashisth/backend-project.git ${APP_DIR};
+                            fi
 
-                        cd ${APP_DIR}
-                        git pull origin main
-                        npm install
-                        pm2 restart app || pm2 start index.js --name app
-                    '
-                    """
+                            cd ${APP_DIR}
+                            git pull origin main
+                            npm install
+                            pm2 restart app || pm2 start index.js --name app
+                        '
+                        """
+                    }
                 }
             }
         }
