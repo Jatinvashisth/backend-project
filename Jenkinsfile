@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_HOST = "YOUR_EC2_PUBLIC_IP"
+        EC2_HOST = "23.20.85.68"
         EC2_USER = "ubuntu"
         APP_DIR = "/home/ubuntu/backend-project"
     }
@@ -31,6 +31,16 @@ pipeline {
                         pm2 restart app || pm2 start app.js --name app
                     '
                     """
+                }
+            }
+        }
+    }
+    agent any
+    stages {
+        stage('Test SSH') {
+            steps {
+                sshagent(['ec2-ssh-key']) {
+                    sh 'echo "SSH working"'
                 }
             }
         }
