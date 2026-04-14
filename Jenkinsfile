@@ -35,14 +35,4 @@ pipeline {
             }
         }
     }
-    agent any
-    stages {
-        stage('Test SSH') {
-            steps {
-                sshagent(['ec2-ssh-key']) {
-                    sh 'echo "SSH working"'
-                }
-            }
-        }
-    }
 }
