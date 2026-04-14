@@ -12,6 +12,6 @@ app.get("/check", (req, res) => {
 });
 
 // Server start
-app.listen(8080,()=> {
+app.listen(3000,()=> {
   console.log("Server running on port 3000");
 });
