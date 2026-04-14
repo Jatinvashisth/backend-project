@@ -9,6 +9,7 @@ pipeline {
         EC2_HOST = "23.20.85.68"
         EC2_USER = "ubuntu"
         APP_DIR = "/home/ubuntu/backend-project"
+        
     }
 
     stages {
