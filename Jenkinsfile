@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tool {
-        nodejs 'nodejs'
-    }
+    tools {
+    nodejs 'nodejs'
+}
 
     environment {
         EC2_HOST = "23.20.85.68"
