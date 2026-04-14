@@ -28,7 +28,7 @@ pipeline {
                         cd ${APP_DIR}
                         git pull origin main
                         npm install
-                        pm2 restart app || pm2 start app.js --name app
+                        pm2 restart app || pm2 start index.js --name app
                     '
                     """
                 }
