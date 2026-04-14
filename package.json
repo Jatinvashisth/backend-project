@@ -5,7 +5,9 @@
   "description": "Basic Express backend project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "keywords": ["node", "express", "backend"],
   "license": "ISC",

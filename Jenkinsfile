@@ -16,6 +16,16 @@ pipeline {
             }
         }
 
+        stage('Build & Test') {
+            steps {
+                sh '''
+                npm install
+                npm test
+                npm run lint
+                '''
+            }
+        }
+
         stage('Deploy to EC2') {
             steps {
                 sshagent(['ec2-ssh-key']) {
