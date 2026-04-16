@@ -8,7 +8,7 @@ app.get("/", (req, res) => {
 
 app.get("/check", (req, res) => {
   console.log("health check endpoint invoked");
-  res.json({ status: "OK" });
+  res.json({ status: "OK." });
 });
 
 app.listen(3000,()=> {
